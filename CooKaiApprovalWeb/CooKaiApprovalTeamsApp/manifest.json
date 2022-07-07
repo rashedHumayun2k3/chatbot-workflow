@@ -1,0 +1,73 @@
+﻿{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.7/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.7",
+  "version": "1.0.0",
+  "id": "f036cef7-8b1e-44ca-8276-7792adc67bbb",
+  "packageName": "com.cookaiapproval.app",
+  "developer": {
+    "name": "Ixora Solution Ltd.",
+    "websiteUrl": "https://ixorasolution.com",
+    "privacyUrl": "https://ixorasolution.com/privacy",
+    "termsOfUseUrl": "https://ixorasolution.com/terms"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Coo Kai Smart WorkFlow",
+    "full": "App for Coo Kai Smart WorkFlow "
+  },
+  "description": {
+    "short": "App for Coo Kai Smart WorkFlow",
+    "full": "App for Coo Kai Smart WorkFlow  inside teams"
+  },
+  "accentColor": "#FFFFFF",
+  "staticTabs": [
+    {
+      "entityId": "CookaiDashboard",
+      "scopes": [
+        "personal"
+      ],
+      "name": "ダッシュボード",
+      "contentUrl": "https://cookaiapproval.azurewebsites.net/",
+      "websiteUrl": "https://cookaiapproval.azurewebsites.net/"
+    }
+  ],
+  "bots": [
+    {
+      "botId": "42db52a3-f501-4620-a2e5-3f12a3289930",
+      "scopes": [
+        "personal"
+      ],
+      "supportsFiles": false,
+      "isNotificationOnly": false
+    }
+  ],
+  "composeExtensions": [
+    {
+      "botId": "42db52a3-f501-4620-a2e5-3f12a3289930",
+      "canUpdateConfiguration": false,
+      "commands": [
+        {
+          "id": "createRequest",
+          "type": "action",
+          "title": "Create Approval Request",
+          "description": "Create Approval Request",
+          "initialRun": false,
+          "fetchTask": true,
+          "context": [
+            "compose"
+          ]
+        }
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "*.azurewebsites.net"    
+  ]
+}

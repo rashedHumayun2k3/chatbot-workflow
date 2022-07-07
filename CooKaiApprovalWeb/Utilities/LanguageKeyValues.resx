@@ -1,0 +1,231 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Approve" xml:space="preserve">
+    <value>承認</value>
+    <comment>Approve</comment>
+  </data>
+  <data name="Approved" xml:space="preserve">
+    <value>承認されました</value>
+    <comment>Approved</comment>
+  </data>
+  <data name="Attachments" xml:space="preserve">
+    <value>添付ファイル</value>
+    <comment>Attachments</comment>
+  </data>
+  <data name="CommentPlaceHolderText" xml:space="preserve">
+    <value>コメントを入力してください。</value>
+    <comment>Please provide comment</comment>
+  </data>
+  <data name="HideDetails" xml:space="preserve">
+    <value>簡易表示</value>
+    <comment>Hide details</comment>
+  </data>
+  <data name="outOf" xml:space="preserve">
+    <value>処理済み</value>
+    <comment>people processed</comment>
+  </data>
+  <data name="Pending" xml:space="preserve">
+    <value>承認待</value>
+    <comment>Pending</comment>
+  </data>
+  <data name="Reject" xml:space="preserve">
+    <value>却下</value>
+    <comment>Reject</comment>
+  </data>
+  <data name="Rejected" xml:space="preserve">
+    <value>却下されました</value>
+    <comment>Rejected</comment>
+  </data>
+  <data name="Request" xml:space="preserve">
+    <value>申請</value>
+    <comment>Request</comment>
+  </data>
+  <data name="RequestAlreadyApprovedOrRejected" xml:space="preserve">
+    <value>申請は既に返答がありました。</value>
+    <comment>Request is already approved or rejected or deleted</comment>
+  </data>
+  <data name="RequestedByTextForApprover" xml:space="preserve">
+    <value>さんからの承認依頼</value>
+    <comment>sent you an approval request</comment>
+  </data>
+  <data name="RequestProcessed" xml:space="preserve">
+    <value>承認依頼への回答ありがとうございます。</value>
+    <comment>Thank you for responding to the approval request</comment>
+  </data>
+  <data name="Responded" xml:space="preserve">
+    <value>回答しました</value>
+    <comment>Responded</comment>
+  </data>
+  <data name="ResponsesTextMultiple" xml:space="preserve">
+    <value>完了条件：全員の承認が必要</value>
+    <comment>Responses: Everyone's approval needed</comment>
+  </data>
+  <data name="ResponsesTextSingle" xml:space="preserve">
+    <value>完了条件：1人の承認があれば良い</value>
+    <comment>Responses: Single approval needed</comment>
+  </data>
+  <data name="ShowDetails" xml:space="preserve">
+    <value>詳細表示</value>
+    <comment>Show details</comment>
+  </data>
+  <data name="UserNotFound" xml:space="preserve">
+    <value>ユーザーがみつかりません。</value>
+    <comment>User not found</comment>
+  </data>
+  <data name="GenericError" xml:space="preserve">
+    <value>エラーが発生しました。</value>
+    <comment>An error occurred</comment>
+  </data>
+  <data name="YourRequestText" xml:space="preserve">
+    <value>あなたの申請は</value>
+    <comment>Your request has been</comment>
+  </data>
+  <data name="BotWelcomeText" xml:space="preserve">
+    <value>Coo kai Bot へようこそ</value>
+    <comment>Welcome to the Coo kai Bot.</comment>
+  </data>
+  <data name="ApprovalStatusCardBodyText" xml:space="preserve">
+    <value>承認依頼中が **{0}** 件、未回答が **{1}** 件あります。</value>
+    <comment>You have **{0} pending** request and **{1} waiting** for your approval</comment>
+  </data>
+  <data name="RequestInProgressError" xml:space="preserve">
+    <value>申請は一部回答が来ているため、削除ができません。</value>
+    <comment>The request is already in progress, you can not delete it</comment>
+  </data>
+  <data name="CommentText" xml:space="preserve">
+    <value>コメント</value>
+    <comment>Comment</comment>
+  </data>
+  <data name="CreateApprovalRequestText" xml:space="preserve">
+    <value>新規作成</value>
+    <comment>Create Approval Request</comment>
+  </data>
+  <data name="ViewApprovalRequestsText" xml:space="preserve">
+    <value>申請を表示</value>
+    <comment>View Requests</comment>
+  </data>
+  <data name="YouApprovalStatusText" xml:space="preserve">
+    <value>承認状況</value>
+    <comment>Your Approval Status</comment>
+  </data>
+  <data name="RequestedByTextForViewer" xml:space="preserve">
+    <value>さんからの閲覧依頼</value>
+  </data>
+</root>

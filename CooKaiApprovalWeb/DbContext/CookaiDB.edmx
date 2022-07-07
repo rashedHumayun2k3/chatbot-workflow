@@ -1,0 +1,1212 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CookaiApprovalDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ApprovalLevels">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="LevelName" Type="nvarchar" MaxLength="250" />
+          <Property Name="LevelNo" Type="int" Nullable="false" />
+          <Property Name="IsSingleApprover" Type="bit" Nullable="false" />
+          <Property Name="ResponseDate" Type="datetime" />
+          <Property Name="ApprovalStatusId" Type="int" />
+          <Property Name="ApprovalRequestId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="IsApproveOnly" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ApprovalRequestApproverOrViewer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ApprovalLevelId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="2000" />
+          <Property Name="ResponseDate" Type="datetime" />
+          <Property Name="ApprovalStatusId" Type="int" />
+          <Property Name="IsApprover" Type="bit" Nullable="false" />
+          <Property Name="GroupInfo" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ApprovalRequests">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ParentApprovalRequestId" Type="uniqueidentifier" />
+          <Property Name="Title" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="Details" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="ResponseDate" Type="datetime" />
+          <Property Name="ApprovalStatusId" Type="int" />
+          <Property Name="RequestedDate" Type="datetime" />
+          <Property Name="RequesterUserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AttachementUrl" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="Modified" Type="datetime" />
+          <Property Name="TenantInfoId" Type="bigint" Nullable="false" />
+          <Property Name="TotalLevel" Type="int" />
+          <Property Name="CurrentLevel" Type="int" />
+          <Property Name="TemplateId" Type="uniqueidentifier" />
+          <Property Name="DesiredCompletionDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ApprovalStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PerWebUserCache">
+          <Key>
+            <PropertyRef Name="EntryId" />
+          </Key>
+          <Property Name="EntryId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WebUserUniqueId" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="CacheBits" Type="varbinary(max)" Nullable="false" />
+          <Property Name="LastWrite" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RequestAttachments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="BlobUrl" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="FileName" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="FileSize" Type="int" Nullable="false" />
+          <Property Name="FileUploadId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ApprovalRequestId" Type="uniqueidentifier" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedUserId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RequestRemarks">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ApprovalRequestId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="2000" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedUserId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TemplateApproverOrViewer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TemplateLevelId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IsApprover" Type="bit" Nullable="false" />
+          <Property Name="GroupInfo" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TemplateLevels">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="LevelName" Type="nvarchar" MaxLength="250" />
+          <Property Name="LevelNo" Type="int" Nullable="false" />
+          <Property Name="IsSingleApprover" Type="bit" Nullable="false" />
+          <Property Name="TemplateId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="IsApproveOnly" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Templates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Body" Type="nvarchar" MaxLength="2000" />
+          <Property Name="TenantInfoId" Type="bigint" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TenantInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenantId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="GivenAdminconsent" Type="bit" />
+          <Property Name="BotServiceUrl" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserPrincipalName" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="TeamUserId" Type="nvarchar" MaxLength="500" />
+          <Property Name="AadObjectId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TenantId" Type="bigint" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="500" />
+          <Property Name="ConversationId" Type="nvarchar" MaxLength="500" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserPreferences">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" />
+          <Property Name="SeletedFilterStatus" Type="int" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ApprovalRequestApproverOrViewer_ApprovalStatus">
+          <End Role="ApprovalStatus" Type="Self.ApprovalStatus" Multiplicity="0..1" />
+          <End Role="ApprovalRequestApproverOrViewer" Type="Self.ApprovalRequestApproverOrViewer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApprovalStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ApprovalRequestApproverOrViewer">
+              <PropertyRef Name="ApprovalStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ApprovalRequestApproverOrViewer_ApprovalSteps">
+          <End Role="ApprovalLevels" Type="Self.ApprovalLevels" Multiplicity="1" />
+          <End Role="ApprovalRequestApproverOrViewer" Type="Self.ApprovalRequestApproverOrViewer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApprovalLevels">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ApprovalRequestApproverOrViewer">
+              <PropertyRef Name="ApprovalLevelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ApprovalRequests_ApprovalStatus">
+          <End Role="ApprovalStatus" Type="Self.ApprovalStatus" Multiplicity="0..1" />
+          <End Role="ApprovalRequests" Type="Self.ApprovalRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApprovalStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ApprovalRequests">
+              <PropertyRef Name="ApprovalStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ApprovalRequests_Templates">
+          <End Role="Templates" Type="Self.Templates" Multiplicity="0..1" />
+          <End Role="ApprovalRequests" Type="Self.ApprovalRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Templates">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ApprovalRequests">
+              <PropertyRef Name="TemplateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ApprovalRequests_TenantInfo">
+          <End Role="TenantInfo" Type="Self.TenantInfo" Multiplicity="1" />
+          <End Role="ApprovalRequests" Type="Self.ApprovalRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TenantInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ApprovalRequests">
+              <PropertyRef Name="TenantInfoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ApprovalRequests_UserInfo">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
+          <End Role="ApprovalRequests" Type="Self.ApprovalRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ApprovalRequests">
+              <PropertyRef Name="RequesterUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ApprovalSteps_ApprovalRequests">
+          <End Role="ApprovalRequests" Type="Self.ApprovalRequests" Multiplicity="1" />
+          <End Role="ApprovalLevels" Type="Self.ApprovalLevels" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApprovalRequests">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ApprovalLevels">
+              <PropertyRef Name="ApprovalRequestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ApprovalSteps_ApprovalStatus">
+          <End Role="ApprovalStatus" Type="Self.ApprovalStatus" Multiplicity="0..1" />
+          <End Role="ApprovalLevels" Type="Self.ApprovalLevels" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApprovalStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ApprovalLevels">
+              <PropertyRef Name="ApprovalStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RequestApproversOrViewers_UserInfo">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
+          <End Role="ApprovalRequestApproverOrViewer" Type="Self.ApprovalRequestApproverOrViewer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ApprovalRequestApproverOrViewer">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RequestAttachments_ApprovalRequests">
+          <End Role="ApprovalRequests" Type="Self.ApprovalRequests" Multiplicity="0..1" />
+          <End Role="RequestAttachments" Type="Self.RequestAttachments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApprovalRequests">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RequestAttachments">
+              <PropertyRef Name="ApprovalRequestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RequestAttachments_UserInfo">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
+          <End Role="RequestAttachments" Type="Self.RequestAttachments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RequestAttachments">
+              <PropertyRef Name="CreatedUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RequestRemarks_ApprovalRequests">
+          <End Role="ApprovalRequests" Type="Self.ApprovalRequests" Multiplicity="1" />
+          <End Role="RequestRemarks" Type="Self.RequestRemarks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApprovalRequests">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RequestRemarks">
+              <PropertyRef Name="ApprovalRequestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RequestRemarks_UserInfo">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
+          <End Role="RequestRemarks" Type="Self.RequestRemarks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RequestRemarks">
+              <PropertyRef Name="CreatedUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TemplateApproverOrViewer_TemplateLevels">
+          <End Role="TemplateLevels" Type="Self.TemplateLevels" Multiplicity="1" />
+          <End Role="TemplateApproverOrViewer" Type="Self.TemplateApproverOrViewer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TemplateLevels">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TemplateApproverOrViewer">
+              <PropertyRef Name="TemplateLevelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TemplateApproverOrViewer_UserInfo">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
+          <End Role="TemplateApproverOrViewer" Type="Self.TemplateApproverOrViewer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TemplateApproverOrViewer">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TemplateLevels_Templates">
+          <End Role="Templates" Type="Self.Templates" Multiplicity="1" />
+          <End Role="TemplateLevels" Type="Self.TemplateLevels" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Templates">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TemplateLevels">
+              <PropertyRef Name="TemplateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Templates_TenantInfo">
+          <End Role="TenantInfo" Type="Self.TenantInfo" Multiplicity="1" />
+          <End Role="Templates" Type="Self.Templates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TenantInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Templates">
+              <PropertyRef Name="TenantInfoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserInfo_TenantInfo">
+          <End Role="TenantInfo" Type="Self.TenantInfo" Multiplicity="1" />
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TenantInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserInfo">
+              <PropertyRef Name="TenantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserPreferences_UserInfo">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="0..1" />
+          <End Role="UserPreferences" Type="Self.UserPreferences" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserPreferences">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CookaiApprovalDBModelStoreContainer">
+          <EntitySet Name="ApprovalLevels" EntityType="Self.ApprovalLevels" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ApprovalRequestApproverOrViewer" EntityType="Self.ApprovalRequestApproverOrViewer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ApprovalRequests" EntityType="Self.ApprovalRequests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ApprovalStatus" EntityType="Self.ApprovalStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PerWebUserCache" EntityType="Self.PerWebUserCache" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RequestAttachments" EntityType="Self.RequestAttachments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RequestRemarks" EntityType="Self.RequestRemarks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TemplateApproverOrViewer" EntityType="Self.TemplateApproverOrViewer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TemplateLevels" EntityType="Self.TemplateLevels" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Templates" EntityType="Self.Templates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TenantInfo" EntityType="Self.TenantInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserInfo" EntityType="Self.UserInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserPreferences" EntityType="Self.UserPreferences" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ApprovalRequestApproverOrViewer_ApprovalStatus" Association="Self.FK_ApprovalRequestApproverOrViewer_ApprovalStatus">
+            <End Role="ApprovalStatus" EntitySet="ApprovalStatus" />
+            <End Role="ApprovalRequestApproverOrViewer" EntitySet="ApprovalRequestApproverOrViewer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ApprovalRequestApproverOrViewer_ApprovalSteps" Association="Self.FK_ApprovalRequestApproverOrViewer_ApprovalSteps">
+            <End Role="ApprovalLevels" EntitySet="ApprovalLevels" />
+            <End Role="ApprovalRequestApproverOrViewer" EntitySet="ApprovalRequestApproverOrViewer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ApprovalRequests_ApprovalStatus" Association="Self.FK_ApprovalRequests_ApprovalStatus">
+            <End Role="ApprovalStatus" EntitySet="ApprovalStatus" />
+            <End Role="ApprovalRequests" EntitySet="ApprovalRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ApprovalRequests_Templates" Association="Self.FK_ApprovalRequests_Templates">
+            <End Role="Templates" EntitySet="Templates" />
+            <End Role="ApprovalRequests" EntitySet="ApprovalRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ApprovalRequests_TenantInfo" Association="Self.FK_ApprovalRequests_TenantInfo">
+            <End Role="TenantInfo" EntitySet="TenantInfo" />
+            <End Role="ApprovalRequests" EntitySet="ApprovalRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ApprovalRequests_UserInfo" Association="Self.FK_ApprovalRequests_UserInfo">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="ApprovalRequests" EntitySet="ApprovalRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ApprovalSteps_ApprovalRequests" Association="Self.FK_ApprovalSteps_ApprovalRequests">
+            <End Role="ApprovalRequests" EntitySet="ApprovalRequests" />
+            <End Role="ApprovalLevels" EntitySet="ApprovalLevels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ApprovalSteps_ApprovalStatus" Association="Self.FK_ApprovalSteps_ApprovalStatus">
+            <End Role="ApprovalStatus" EntitySet="ApprovalStatus" />
+            <End Role="ApprovalLevels" EntitySet="ApprovalLevels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RequestApproversOrViewers_UserInfo" Association="Self.FK_RequestApproversOrViewers_UserInfo">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="ApprovalRequestApproverOrViewer" EntitySet="ApprovalRequestApproverOrViewer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RequestAttachments_ApprovalRequests" Association="Self.FK_RequestAttachments_ApprovalRequests">
+            <End Role="ApprovalRequests" EntitySet="ApprovalRequests" />
+            <End Role="RequestAttachments" EntitySet="RequestAttachments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RequestAttachments_UserInfo" Association="Self.FK_RequestAttachments_UserInfo">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="RequestAttachments" EntitySet="RequestAttachments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RequestRemarks_ApprovalRequests" Association="Self.FK_RequestRemarks_ApprovalRequests">
+            <End Role="ApprovalRequests" EntitySet="ApprovalRequests" />
+            <End Role="RequestRemarks" EntitySet="RequestRemarks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RequestRemarks_UserInfo" Association="Self.FK_RequestRemarks_UserInfo">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="RequestRemarks" EntitySet="RequestRemarks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TemplateApproverOrViewer_TemplateLevels" Association="Self.FK_TemplateApproverOrViewer_TemplateLevels">
+            <End Role="TemplateLevels" EntitySet="TemplateLevels" />
+            <End Role="TemplateApproverOrViewer" EntitySet="TemplateApproverOrViewer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TemplateApproverOrViewer_UserInfo" Association="Self.FK_TemplateApproverOrViewer_UserInfo">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="TemplateApproverOrViewer" EntitySet="TemplateApproverOrViewer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TemplateLevels_Templates" Association="Self.FK_TemplateLevels_Templates">
+            <End Role="Templates" EntitySet="Templates" />
+            <End Role="TemplateLevels" EntitySet="TemplateLevels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Templates_TenantInfo" Association="Self.FK_Templates_TenantInfo">
+            <End Role="TenantInfo" EntitySet="TenantInfo" />
+            <End Role="Templates" EntitySet="Templates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserInfo_TenantInfo" Association="Self.FK_UserInfo_TenantInfo">
+            <End Role="TenantInfo" EntitySet="TenantInfo" />
+            <End Role="UserInfo" EntitySet="UserInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserPreferences_UserInfo" Association="Self.FK_UserPreferences_UserInfo">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="UserPreferences" EntitySet="UserPreferences" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CookaiApprovalDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="CookaiApprovalDB" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="ApproveOrReject" ReturnType="Collection(CookaiApprovalDBModel.ApproveOrReject_Result)">
+            <Parameter Name="ApprovalRequestId" Mode="In" Type="Guid" />
+            <Parameter Name="MemberAADObjectId" Mode="In" Type="Guid" />
+            <Parameter Name="Comment" Mode="In" Type="String" />
+            <Parameter Name="IsForApprove" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <EntitySet Name="ApprovalLevels" EntityType="CookaiApprovalDBModel.ApprovalLevel" />
+          <EntitySet Name="ApprovalRequestApproverOrViewers" EntityType="CookaiApprovalDBModel.ApprovalRequestApproverOrViewer" />
+          <EntitySet Name="ApprovalRequests" EntityType="CookaiApprovalDBModel.ApprovalRequest" />
+          <EntitySet Name="ApprovalStatus" EntityType="CookaiApprovalDBModel.ApprovalStatu" />
+          <EntitySet Name="PerWebUserCaches" EntityType="CookaiApprovalDBModel.PerWebUserCache" />
+          <EntitySet Name="RequestAttachments" EntityType="CookaiApprovalDBModel.RequestAttachment" />
+          <EntitySet Name="RequestRemarks" EntityType="CookaiApprovalDBModel.RequestRemark" />
+          <EntitySet Name="TemplateApproverOrViewers" EntityType="CookaiApprovalDBModel.TemplateApproverOrViewer" />
+          <EntitySet Name="TemplateLevels" EntityType="CookaiApprovalDBModel.TemplateLevel" />
+          <EntitySet Name="Templates" EntityType="CookaiApprovalDBModel.Template" />
+          <EntitySet Name="TenantInfoes" EntityType="CookaiApprovalDBModel.TenantInfo" />
+          <EntitySet Name="UserInfoes" EntityType="CookaiApprovalDBModel.UserInfo" />
+          <EntitySet Name="UserPreferences" EntityType="CookaiApprovalDBModel.UserPreference" />
+          <AssociationSet Name="FK_ApprovalRequestApproverOrViewer_ApprovalSteps" Association="CookaiApprovalDBModel.FK_ApprovalRequestApproverOrViewer_ApprovalSteps">
+            <End Role="ApprovalLevel" EntitySet="ApprovalLevels" />
+            <End Role="ApprovalRequestApproverOrViewer" EntitySet="ApprovalRequestApproverOrViewers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ApprovalSteps_ApprovalRequests" Association="CookaiApprovalDBModel.FK_ApprovalSteps_ApprovalRequests">
+            <End Role="ApprovalRequest" EntitySet="ApprovalRequests" />
+            <End Role="ApprovalLevel" EntitySet="ApprovalLevels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ApprovalSteps_ApprovalStatus" Association="CookaiApprovalDBModel.FK_ApprovalSteps_ApprovalStatus">
+            <End Role="ApprovalStatu" EntitySet="ApprovalStatus" />
+            <End Role="ApprovalLevel" EntitySet="ApprovalLevels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ApprovalRequestApproverOrViewer_ApprovalStatus" Association="CookaiApprovalDBModel.FK_ApprovalRequestApproverOrViewer_ApprovalStatus">
+            <End Role="ApprovalStatu" EntitySet="ApprovalStatus" />
+            <End Role="ApprovalRequestApproverOrViewer" EntitySet="ApprovalRequestApproverOrViewers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RequestApproversOrViewers_UserInfo" Association="CookaiApprovalDBModel.FK_RequestApproversOrViewers_UserInfo">
+            <End Role="UserInfo" EntitySet="UserInfoes" />
+            <End Role="ApprovalRequestApproverOrViewer" EntitySet="ApprovalRequestApproverOrViewers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ApprovalRequests_ApprovalStatus" Association="CookaiApprovalDBModel.FK_ApprovalRequests_ApprovalStatus">
+            <End Role="ApprovalStatu" EntitySet="ApprovalStatus" />
+            <End Role="ApprovalRequest" EntitySet="ApprovalRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ApprovalRequests_Templates" Association="CookaiApprovalDBModel.FK_ApprovalRequests_Templates">
+            <End Role="Template" EntitySet="Templates" />
+            <End Role="ApprovalRequest" EntitySet="ApprovalRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ApprovalRequests_TenantInfo" Association="CookaiApprovalDBModel.FK_ApprovalRequests_TenantInfo">
+            <End Role="TenantInfo" EntitySet="TenantInfoes" />
+            <End Role="ApprovalRequest" EntitySet="ApprovalRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ApprovalRequests_UserInfo" Association="CookaiApprovalDBModel.FK_ApprovalRequests_UserInfo">
+            <End Role="UserInfo" EntitySet="UserInfoes" />
+            <End Role="ApprovalRequest" EntitySet="ApprovalRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RequestAttachments_ApprovalRequests" Association="CookaiApprovalDBModel.FK_RequestAttachments_ApprovalRequests">
+            <End Role="ApprovalRequest" EntitySet="ApprovalRequests" />
+            <End Role="RequestAttachment" EntitySet="RequestAttachments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RequestRemarks_ApprovalRequests" Association="CookaiApprovalDBModel.FK_RequestRemarks_ApprovalRequests">
+            <End Role="ApprovalRequest" EntitySet="ApprovalRequests" />
+            <End Role="RequestRemark" EntitySet="RequestRemarks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RequestAttachments_UserInfo" Association="CookaiApprovalDBModel.FK_RequestAttachments_UserInfo">
+            <End Role="UserInfo" EntitySet="UserInfoes" />
+            <End Role="RequestAttachment" EntitySet="RequestAttachments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RequestRemarks_UserInfo" Association="CookaiApprovalDBModel.FK_RequestRemarks_UserInfo">
+            <End Role="UserInfo" EntitySet="UserInfoes" />
+            <End Role="RequestRemark" EntitySet="RequestRemarks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TemplateApproverOrViewer_TemplateLevels" Association="CookaiApprovalDBModel.FK_TemplateApproverOrViewer_TemplateLevels">
+            <End Role="TemplateLevel" EntitySet="TemplateLevels" />
+            <End Role="TemplateApproverOrViewer" EntitySet="TemplateApproverOrViewers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TemplateApproverOrViewer_UserInfo" Association="CookaiApprovalDBModel.FK_TemplateApproverOrViewer_UserInfo">
+            <End Role="UserInfo" EntitySet="UserInfoes" />
+            <End Role="TemplateApproverOrViewer" EntitySet="TemplateApproverOrViewers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TemplateLevels_Templates" Association="CookaiApprovalDBModel.FK_TemplateLevels_Templates">
+            <End Role="Template" EntitySet="Templates" />
+            <End Role="TemplateLevel" EntitySet="TemplateLevels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Templates_TenantInfo" Association="CookaiApprovalDBModel.FK_Templates_TenantInfo">
+            <End Role="TenantInfo" EntitySet="TenantInfoes" />
+            <End Role="Template" EntitySet="Templates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserInfo_TenantInfo" Association="CookaiApprovalDBModel.FK_UserInfo_TenantInfo">
+            <End Role="TenantInfo" EntitySet="TenantInfoes" />
+            <End Role="UserInfo" EntitySet="UserInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserPreferences_UserInfo" Association="CookaiApprovalDBModel.FK_UserPreferences_UserInfo">
+            <End Role="UserInfo" EntitySet="UserInfoes" />
+            <End Role="UserPreference" EntitySet="UserPreferences" />
+          </AssociationSet>
+          </EntityContainer>
+        <ComplexType Name="ApproveOrReject_Result">
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="Guid" Name="ApprovalRequestId" Nullable="false" />
+          <Property Type="Guid" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="Comment" Nullable="true" MaxLength="2000" />
+          <Property Type="DateTime" Name="ResponseDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="ApprovalStatusId" Nullable="true" />
+          <Property Type="Boolean" Name="IsApprover" Nullable="false" />
+          <Property Type="String" Name="GroupInfo" Nullable="true" MaxLength="1000" />
+          <Property Type="DateTime" Name="Created" Nullable="false" Precision="23" />
+        </ComplexType>
+        <EntityType Name="ApprovalLevel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="LevelName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="LevelNo" Type="Int32" Nullable="false" />
+          <Property Name="IsSingleApprover" Type="Boolean" Nullable="false" />
+          <Property Name="ResponseDate" Type="DateTime" Precision="3" />
+          <Property Name="ApprovalStatusId" Type="Int32" />
+          <Property Name="ApprovalRequestId" Type="Guid" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="ApprovalRequestApproverOrViewers" Relationship="CookaiApprovalDBModel.FK_ApprovalRequestApproverOrViewer_ApprovalSteps" FromRole="ApprovalLevel" ToRole="ApprovalRequestApproverOrViewer" />
+          <NavigationProperty Name="ApprovalRequest" Relationship="CookaiApprovalDBModel.FK_ApprovalSteps_ApprovalRequests" FromRole="ApprovalLevel" ToRole="ApprovalRequest" />
+          <NavigationProperty Name="ApprovalStatu" Relationship="CookaiApprovalDBModel.FK_ApprovalSteps_ApprovalStatus" FromRole="ApprovalLevel" ToRole="ApprovalStatu" />
+          <Property Name="IsApproveOnly" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ApprovalRequestApproverOrViewer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="ApprovalLevelId" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="ResponseDate" Type="DateTime" Precision="3" />
+          <Property Name="ApprovalStatusId" Type="Int32" />
+          <Property Name="IsApprover" Type="Boolean" Nullable="false" />
+          <Property Name="GroupInfo" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="ApprovalLevel" Relationship="CookaiApprovalDBModel.FK_ApprovalRequestApproverOrViewer_ApprovalSteps" FromRole="ApprovalRequestApproverOrViewer" ToRole="ApprovalLevel" />
+          <NavigationProperty Name="ApprovalStatu" Relationship="CookaiApprovalDBModel.FK_ApprovalRequestApproverOrViewer_ApprovalStatus" FromRole="ApprovalRequestApproverOrViewer" ToRole="ApprovalStatu" />
+          <NavigationProperty Name="UserInfo" Relationship="CookaiApprovalDBModel.FK_RequestApproversOrViewers_UserInfo" FromRole="ApprovalRequestApproverOrViewer" ToRole="UserInfo" />
+        </EntityType>
+        <EntityType Name="ApprovalRequest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="ParentApprovalRequestId" Type="Guid" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Details" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="ResponseDate" Type="DateTime" Precision="3" />
+          <Property Name="ApprovalStatusId" Type="Int32" />
+          <Property Name="RequestedDate" Type="DateTime" Precision="3" />
+          <Property Name="RequesterUserId" Type="Guid" Nullable="false" />
+          <Property Name="AttachementUrl" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Modified" Type="DateTime" Precision="3" />
+          <Property Name="TenantInfoId" Type="Int64" Nullable="false" />
+          <Property Name="TotalLevel" Type="Int32" />
+          <Property Name="CurrentLevel" Type="Int32" />
+          <Property Name="TemplateId" Type="Guid" />
+          <NavigationProperty Name="ApprovalLevels" Relationship="CookaiApprovalDBModel.FK_ApprovalSteps_ApprovalRequests" FromRole="ApprovalRequest" ToRole="ApprovalLevel" />
+          <NavigationProperty Name="ApprovalStatu" Relationship="CookaiApprovalDBModel.FK_ApprovalRequests_ApprovalStatus" FromRole="ApprovalRequest" ToRole="ApprovalStatu" />
+          <NavigationProperty Name="Template" Relationship="CookaiApprovalDBModel.FK_ApprovalRequests_Templates" FromRole="ApprovalRequest" ToRole="Template" />
+          <NavigationProperty Name="TenantInfo" Relationship="CookaiApprovalDBModel.FK_ApprovalRequests_TenantInfo" FromRole="ApprovalRequest" ToRole="TenantInfo" />
+          <NavigationProperty Name="UserInfo" Relationship="CookaiApprovalDBModel.FK_ApprovalRequests_UserInfo" FromRole="ApprovalRequest" ToRole="UserInfo" />
+          <NavigationProperty Name="RequestAttachments" Relationship="CookaiApprovalDBModel.FK_RequestAttachments_ApprovalRequests" FromRole="ApprovalRequest" ToRole="RequestAttachment" />
+          <NavigationProperty Name="RequestRemarks" Relationship="CookaiApprovalDBModel.FK_RequestRemarks_ApprovalRequests" FromRole="ApprovalRequest" ToRole="RequestRemark" />
+          <Property Name="DesiredCompletionDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="ApprovalStatu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="ApprovalLevels" Relationship="CookaiApprovalDBModel.FK_ApprovalSteps_ApprovalStatus" FromRole="ApprovalStatu" ToRole="ApprovalLevel" />
+          <NavigationProperty Name="ApprovalRequestApproverOrViewers" Relationship="CookaiApprovalDBModel.FK_ApprovalRequestApproverOrViewer_ApprovalStatus" FromRole="ApprovalStatu" ToRole="ApprovalRequestApproverOrViewer" />
+          <NavigationProperty Name="ApprovalRequests" Relationship="CookaiApprovalDBModel.FK_ApprovalRequests_ApprovalStatus" FromRole="ApprovalStatu" ToRole="ApprovalRequest" />
+        </EntityType>
+        <EntityType Name="PerWebUserCache">
+          <Key>
+            <PropertyRef Name="EntryId" />
+          </Key>
+          <Property Name="EntryId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WebUserUniqueId" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CacheBits" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="LastWrite" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="RequestAttachment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="BlobUrl" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="FileName" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="FileSize" Type="Int32" Nullable="false" />
+          <Property Name="FileUploadId" Type="Guid" Nullable="false" />
+          <Property Name="ApprovalRequestId" Type="Guid" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedUserId" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="ApprovalRequest" Relationship="CookaiApprovalDBModel.FK_RequestAttachments_ApprovalRequests" FromRole="RequestAttachment" ToRole="ApprovalRequest" />
+          <NavigationProperty Name="UserInfo" Relationship="CookaiApprovalDBModel.FK_RequestAttachments_UserInfo" FromRole="RequestAttachment" ToRole="UserInfo" />
+        </EntityType>
+        <EntityType Name="RequestRemark">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="ApprovalRequestId" Type="Guid" Nullable="false" />
+          <Property Name="Remark" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedUserId" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="ApprovalRequest" Relationship="CookaiApprovalDBModel.FK_RequestRemarks_ApprovalRequests" FromRole="RequestRemark" ToRole="ApprovalRequest" />
+          <NavigationProperty Name="UserInfo" Relationship="CookaiApprovalDBModel.FK_RequestRemarks_UserInfo" FromRole="RequestRemark" ToRole="UserInfo" />
+        </EntityType>
+        <EntityType Name="TemplateApproverOrViewer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="TemplateLevelId" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="IsApprover" Type="Boolean" Nullable="false" />
+          <Property Name="GroupInfo" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="TemplateLevel" Relationship="CookaiApprovalDBModel.FK_TemplateApproverOrViewer_TemplateLevels" FromRole="TemplateApproverOrViewer" ToRole="TemplateLevel" />
+          <NavigationProperty Name="UserInfo" Relationship="CookaiApprovalDBModel.FK_TemplateApproverOrViewer_UserInfo" FromRole="TemplateApproverOrViewer" ToRole="UserInfo" />
+        </EntityType>
+        <EntityType Name="TemplateLevel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="LevelName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="LevelNo" Type="Int32" Nullable="false" />
+          <Property Name="IsSingleApprover" Type="Boolean" Nullable="false" />
+          <Property Name="TemplateId" Type="Guid" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="TemplateApproverOrViewers" Relationship="CookaiApprovalDBModel.FK_TemplateApproverOrViewer_TemplateLevels" FromRole="TemplateLevel" ToRole="TemplateApproverOrViewer" />
+          <NavigationProperty Name="Template" Relationship="CookaiApprovalDBModel.FK_TemplateLevels_Templates" FromRole="TemplateLevel" ToRole="Template" />
+          <Property Name="IsApproveOnly" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Template">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Body" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="TenantInfoId" Type="Int64" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="ApprovalRequests" Relationship="CookaiApprovalDBModel.FK_ApprovalRequests_Templates" FromRole="Template" ToRole="ApprovalRequest" />
+          <NavigationProperty Name="TemplateLevels" Relationship="CookaiApprovalDBModel.FK_TemplateLevels_Templates" FromRole="Template" ToRole="TemplateLevel" />
+          <NavigationProperty Name="TenantInfo" Relationship="CookaiApprovalDBModel.FK_Templates_TenantInfo" FromRole="Template" ToRole="TenantInfo" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TenantInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenantId" Type="Guid" Nullable="false" />
+          <Property Name="GivenAdminconsent" Type="Boolean" />
+          <Property Name="BotServiceUrl" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="ApprovalRequests" Relationship="CookaiApprovalDBModel.FK_ApprovalRequests_TenantInfo" FromRole="TenantInfo" ToRole="ApprovalRequest" />
+          <NavigationProperty Name="Templates" Relationship="CookaiApprovalDBModel.FK_Templates_TenantInfo" FromRole="TenantInfo" ToRole="Template" />
+          <NavigationProperty Name="UserInfoes" Relationship="CookaiApprovalDBModel.FK_UserInfo_TenantInfo" FromRole="TenantInfo" ToRole="UserInfo" />
+        </EntityType>
+        <EntityType Name="UserInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="UserPrincipalName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="TeamUserId" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="AadObjectId" Type="Guid" Nullable="false" />
+          <Property Name="TenantId" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ConversationId" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="ApprovalRequestApproverOrViewers" Relationship="CookaiApprovalDBModel.FK_RequestApproversOrViewers_UserInfo" FromRole="UserInfo" ToRole="ApprovalRequestApproverOrViewer" />
+          <NavigationProperty Name="ApprovalRequests" Relationship="CookaiApprovalDBModel.FK_ApprovalRequests_UserInfo" FromRole="UserInfo" ToRole="ApprovalRequest" />
+          <NavigationProperty Name="RequestAttachments" Relationship="CookaiApprovalDBModel.FK_RequestAttachments_UserInfo" FromRole="UserInfo" ToRole="RequestAttachment" />
+          <NavigationProperty Name="RequestRemarks" Relationship="CookaiApprovalDBModel.FK_RequestRemarks_UserInfo" FromRole="UserInfo" ToRole="RequestRemark" />
+          <NavigationProperty Name="TemplateApproverOrViewers" Relationship="CookaiApprovalDBModel.FK_TemplateApproverOrViewer_UserInfo" FromRole="UserInfo" ToRole="TemplateApproverOrViewer" />
+          <NavigationProperty Name="TenantInfo" Relationship="CookaiApprovalDBModel.FK_UserInfo_TenantInfo" FromRole="UserInfo" ToRole="TenantInfo" />
+          <NavigationProperty Name="UserPreferences" Relationship="CookaiApprovalDBModel.FK_UserPreferences_UserInfo" FromRole="UserInfo" ToRole="UserPreference" />
+        </EntityType>
+        <EntityType Name="UserPreference">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="Guid" />
+          <Property Name="SeletedFilterStatus" Type="Int32" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="UserInfo" Relationship="CookaiApprovalDBModel.FK_UserPreferences_UserInfo" FromRole="UserPreference" ToRole="UserInfo" />
+        </EntityType>
+        <Association Name="FK_ApprovalRequestApproverOrViewer_ApprovalSteps">
+          <End Type="CookaiApprovalDBModel.ApprovalLevel" Role="ApprovalLevel" Multiplicity="1" />
+          <End Type="CookaiApprovalDBModel.ApprovalRequestApproverOrViewer" Role="ApprovalRequestApproverOrViewer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApprovalLevel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ApprovalRequestApproverOrViewer">
+              <PropertyRef Name="ApprovalLevelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ApprovalSteps_ApprovalRequests">
+          <End Type="CookaiApprovalDBModel.ApprovalRequest" Role="ApprovalRequest" Multiplicity="1" />
+          <End Type="CookaiApprovalDBModel.ApprovalLevel" Role="ApprovalLevel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApprovalRequest">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ApprovalLevel">
+              <PropertyRef Name="ApprovalRequestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ApprovalSteps_ApprovalStatus">
+          <End Type="CookaiApprovalDBModel.ApprovalStatu" Role="ApprovalStatu" Multiplicity="0..1" />
+          <End Type="CookaiApprovalDBModel.ApprovalLevel" Role="ApprovalLevel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApprovalStatu">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ApprovalLevel">
+              <PropertyRef Name="ApprovalStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ApprovalRequestApproverOrViewer_ApprovalStatus">
+          <End Type="CookaiApprovalDBModel.ApprovalStatu" Role="ApprovalStatu" Multiplicity="0..1" />
+          <End Type="CookaiApprovalDBModel.ApprovalRequestApproverOrViewer" Role="ApprovalRequestApproverOrViewer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApprovalStatu">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ApprovalRequestApproverOrViewer">
+              <PropertyRef Name="ApprovalStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RequestApproversOrViewers_UserInfo">
+          <End Type="CookaiApprovalDBModel.UserInfo" Role="UserInfo" Multiplicity="1" />
+          <End Type="CookaiApprovalDBModel.ApprovalRequestApproverOrViewer" Role="ApprovalRequestApproverOrViewer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ApprovalRequestApproverOrViewer">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ApprovalRequests_ApprovalStatus">
+          <End Type="CookaiApprovalDBModel.ApprovalStatu" Role="ApprovalStatu" Multiplicity="0..1" />
+          <End Type="CookaiApprovalDBModel.ApprovalRequest" Role="ApprovalRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApprovalStatu">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ApprovalRequest">
+              <PropertyRef Name="ApprovalStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ApprovalRequests_Templates">
+          <End Type="CookaiApprovalDBModel.Template" Role="Template" Multiplicity="0..1" />
+          <End Type="CookaiApprovalDBModel.ApprovalRequest" Role="ApprovalRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Template">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ApprovalRequest">
+              <PropertyRef Name="TemplateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ApprovalRequests_TenantInfo">
+          <End Type="CookaiApprovalDBModel.TenantInfo" Role="TenantInfo" Multiplicity="1" />
+          <End Type="CookaiApprovalDBModel.ApprovalRequest" Role="ApprovalRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TenantInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ApprovalRequest">
+              <PropertyRef Name="TenantInfoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ApprovalRequests_UserInfo">
+          <End Type="CookaiApprovalDBModel.UserInfo" Role="UserInfo" Multiplicity="1" />
+          <End Type="CookaiApprovalDBModel.ApprovalRequest" Role="ApprovalRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ApprovalRequest">
+              <PropertyRef Name="RequesterUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RequestAttachments_ApprovalRequests">
+          <End Type="CookaiApprovalDBModel.ApprovalRequest" Role="ApprovalRequest" Multiplicity="0..1" />
+          <End Type="CookaiApprovalDBModel.RequestAttachment" Role="RequestAttachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApprovalRequest">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RequestAttachment">
+              <PropertyRef Name="ApprovalRequestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RequestRemarks_ApprovalRequests">
+          <End Type="CookaiApprovalDBModel.ApprovalRequest" Role="ApprovalRequest" Multiplicity="1" />
+          <End Type="CookaiApprovalDBModel.RequestRemark" Role="RequestRemark" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApprovalRequest">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RequestRemark">
+              <PropertyRef Name="ApprovalRequestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RequestAttachments_UserInfo">
+          <End Type="CookaiApprovalDBModel.UserInfo" Role="UserInfo" Multiplicity="1" />
+          <End Type="CookaiApprovalDBModel.RequestAttachment" Role="RequestAttachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RequestAttachment">
+              <PropertyRef Name="CreatedUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RequestRemarks_UserInfo">
+          <End Type="CookaiApprovalDBModel.UserInfo" Role="UserInfo" Multiplicity="1" />
+          <End Type="CookaiApprovalDBModel.RequestRemark" Role="RequestRemark" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RequestRemark">
+              <PropertyRef Name="CreatedUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TemplateApproverOrViewer_TemplateLevels">
+          <End Type="CookaiApprovalDBModel.TemplateLevel" Role="TemplateLevel" Multiplicity="1" />
+          <End Type="CookaiApprovalDBModel.TemplateApproverOrViewer" Role="TemplateApproverOrViewer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TemplateLevel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TemplateApproverOrViewer">
+              <PropertyRef Name="TemplateLevelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TemplateApproverOrViewer_UserInfo">
+          <End Type="CookaiApprovalDBModel.UserInfo" Role="UserInfo" Multiplicity="1" />
+          <End Type="CookaiApprovalDBModel.TemplateApproverOrViewer" Role="TemplateApproverOrViewer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TemplateApproverOrViewer">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TemplateLevels_Templates">
+          <End Type="CookaiApprovalDBModel.Template" Role="Template" Multiplicity="1" />
+          <End Type="CookaiApprovalDBModel.TemplateLevel" Role="TemplateLevel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Template">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TemplateLevel">
+              <PropertyRef Name="TemplateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Templates_TenantInfo">
+          <End Type="CookaiApprovalDBModel.TenantInfo" Role="TenantInfo" Multiplicity="1" />
+          <End Type="CookaiApprovalDBModel.Template" Role="Template" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TenantInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Template">
+              <PropertyRef Name="TenantInfoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserInfo_TenantInfo">
+          <End Type="CookaiApprovalDBModel.TenantInfo" Role="TenantInfo" Multiplicity="1" />
+          <End Type="CookaiApprovalDBModel.UserInfo" Role="UserInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TenantInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserInfo">
+              <PropertyRef Name="TenantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserPreferences_UserInfo">
+          <End Type="CookaiApprovalDBModel.UserInfo" Role="UserInfo" Multiplicity="0..1" />
+          <End Type="CookaiApprovalDBModel.UserPreference" Role="UserPreference" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserPreference">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CookaiApprovalDBModelStoreContainer" CdmEntityContainer="CookaiApprovalDB">
+          <EntitySetMapping Name="ApprovalLevels">
+            <EntityTypeMapping TypeName="CookaiApprovalDBModel.ApprovalLevel">
+              <MappingFragment StoreEntitySet="ApprovalLevels">
+                <ScalarProperty Name="IsApproveOnly" ColumnName="IsApproveOnly" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="ApprovalRequestId" ColumnName="ApprovalRequestId" />
+                <ScalarProperty Name="ApprovalStatusId" ColumnName="ApprovalStatusId" />
+                <ScalarProperty Name="ResponseDate" ColumnName="ResponseDate" />
+                <ScalarProperty Name="IsSingleApprover" ColumnName="IsSingleApprover" />
+                <ScalarProperty Name="LevelNo" ColumnName="LevelNo" />
+                <ScalarProperty Name="LevelName" ColumnName="LevelName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ApprovalRequestApproverOrViewers">
+            <EntityTypeMapping TypeName="CookaiApprovalDBModel.ApprovalRequestApproverOrViewer">
+              <MappingFragment StoreEntitySet="ApprovalRequestApproverOrViewer">
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="GroupInfo" ColumnName="GroupInfo" />
+                <ScalarProperty Name="IsApprover" ColumnName="IsApprover" />
+                <ScalarProperty Name="ApprovalStatusId" ColumnName="ApprovalStatusId" />
+                <ScalarProperty Name="ResponseDate" ColumnName="ResponseDate" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ApprovalLevelId" ColumnName="ApprovalLevelId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ApprovalRequests">
+            <EntityTypeMapping TypeName="CookaiApprovalDBModel.ApprovalRequest">
+              <MappingFragment StoreEntitySet="ApprovalRequests">
+                <ScalarProperty Name="DesiredCompletionDate" ColumnName="DesiredCompletionDate" />
+                <ScalarProperty Name="TemplateId" ColumnName="TemplateId" />
+                <ScalarProperty Name="CurrentLevel" ColumnName="CurrentLevel" />
+                <ScalarProperty Name="TotalLevel" ColumnName="TotalLevel" />
+                <ScalarProperty Name="TenantInfoId" ColumnName="TenantInfoId" />
+                <ScalarProperty Name="Modified" ColumnName="Modified" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="AttachementUrl" ColumnName="AttachementUrl" />
+                <ScalarProperty Name="RequesterUserId" ColumnName="RequesterUserId" />
+                <ScalarProperty Name="RequestedDate" ColumnName="RequestedDate" />
+                <ScalarProperty Name="ApprovalStatusId" ColumnName="ApprovalStatusId" />
+                <ScalarProperty Name="ResponseDate" ColumnName="ResponseDate" />
+                <ScalarProperty Name="Details" ColumnName="Details" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ParentApprovalRequestId" ColumnName="ParentApprovalRequestId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ApprovalStatus">
+            <EntityTypeMapping TypeName="CookaiApprovalDBModel.ApprovalStatu">
+              <MappingFragment StoreEntitySet="ApprovalStatus">
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PerWebUserCaches">
+            <EntityTypeMapping TypeName="CookaiApprovalDBModel.PerWebUserCache">
+              <MappingFragment StoreEntitySet="PerWebUserCache">
+                <ScalarProperty Name="LastWrite" ColumnName="LastWrite" />
+                <ScalarProperty Name="CacheBits" ColumnName="CacheBits" />
+                <ScalarProperty Name="WebUserUniqueId" ColumnName="WebUserUniqueId" />
+                <ScalarProperty Name="EntryId" ColumnName="EntryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RequestAttachments">
+            <EntityTypeMapping TypeName="CookaiApprovalDBModel.RequestAttachment">
+              <MappingFragment StoreEntitySet="RequestAttachments">
+                <ScalarProperty Name="CreatedUserId" ColumnName="CreatedUserId" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="ApprovalRequestId" ColumnName="ApprovalRequestId" />
+                <ScalarProperty Name="FileUploadId" ColumnName="FileUploadId" />
+                <ScalarProperty Name="FileSize" ColumnName="FileSize" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="BlobUrl" ColumnName="BlobUrl" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RequestRemarks">
+            <EntityTypeMapping TypeName="CookaiApprovalDBModel.RequestRemark">
+              <MappingFragment StoreEntitySet="RequestRemarks">
+                <ScalarProperty Name="CreatedUserId" ColumnName="CreatedUserId" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="ApprovalRequestId" ColumnName="ApprovalRequestId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TemplateApproverOrViewers">
+            <EntityTypeMapping TypeName="CookaiApprovalDBModel.TemplateApproverOrViewer">
+              <MappingFragment StoreEntitySet="TemplateApproverOrViewer">
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="GroupInfo" ColumnName="GroupInfo" />
+                <ScalarProperty Name="IsApprover" ColumnName="IsApprover" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="TemplateLevelId" ColumnName="TemplateLevelId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TemplateLevels">
+            <EntityTypeMapping TypeName="CookaiApprovalDBModel.TemplateLevel">
+              <MappingFragment StoreEntitySet="TemplateLevels">
+                <ScalarProperty Name="IsApproveOnly" ColumnName="IsApproveOnly" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="TemplateId" ColumnName="TemplateId" />
+                <ScalarProperty Name="IsSingleApprover" ColumnName="IsSingleApprover" />
+                <ScalarProperty Name="LevelNo" ColumnName="LevelNo" />
+                <ScalarProperty Name="LevelName" ColumnName="LevelName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Templates">
+            <EntityTypeMapping TypeName="CookaiApprovalDBModel.Template">
+              <MappingFragment StoreEntitySet="Templates">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="TenantInfoId" ColumnName="TenantInfoId" />
+                <ScalarProperty Name="Body" ColumnName="Body" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TenantInfoes">
+            <EntityTypeMapping TypeName="CookaiApprovalDBModel.TenantInfo">
+              <MappingFragment StoreEntitySet="TenantInfo">
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="BotServiceUrl" ColumnName="BotServiceUrl" />
+                <ScalarProperty Name="GivenAdminconsent" ColumnName="GivenAdminconsent" />
+                <ScalarProperty Name="TenantId" ColumnName="TenantId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserInfoes">
+            <EntityTypeMapping TypeName="CookaiApprovalDBModel.UserInfo">
+              <MappingFragment StoreEntitySet="UserInfo">
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="ConversationId" ColumnName="ConversationId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TenantId" ColumnName="TenantId" />
+                <ScalarProperty Name="AadObjectId" ColumnName="AadObjectId" />
+                <ScalarProperty Name="TeamUserId" ColumnName="TeamUserId" />
+                <ScalarProperty Name="UserPrincipalName" ColumnName="UserPrincipalName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserPreferences">
+            <EntityTypeMapping TypeName="CookaiApprovalDBModel.UserPreference">
+              <MappingFragment StoreEntitySet="UserPreferences">
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="SeletedFilterStatus" ColumnName="SeletedFilterStatus" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

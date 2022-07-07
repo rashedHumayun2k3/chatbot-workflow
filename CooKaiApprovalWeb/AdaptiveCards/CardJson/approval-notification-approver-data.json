@@ -1,0 +1,48 @@
+﻿//{
+//    "attachmentCount":1,
+//    "lineImageUrl":"https://cookaiapproval.azurewebsites.net/Content/custom-icons/line.png",
+//    "commentText":"Comment",
+//    "hideDetailsText":"Hide details",
+//    "approveText":"Approve",
+//    "rejectText":"Reject",
+//    "commentPlaceHolderText":"Please provide comment",
+//    "requestText":"Request",
+//    "reqStatusText":"Pending",
+//    "showDetailsText":"Show details",
+//    "respondedText":"Responded",
+//    "outOfText":"out of",
+//    "attachmentsText":"Attachments",
+//    "requestedByTextForApprover":"Requested by",
+//    "requestedByTextForViewer":"Requested by",
+//   "attachments":[
+//       {
+//           "fileName":"file1.xlsx",
+//           "fileUrl":"http://google.com",
+//           "fileIconUrl":"https://cookaiapproval.azurewebsites.net/Content/custom-icons/ta_icon_check_mark.png"
+//       }
+//   ],
+//  "requestedBy":"Mr X",
+// "title": "Need assistance from Finance to draw a budget for Global Corp.",
+//     "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuriesck",
+//         "totalApprover": 3,
+//             "responded": 2,
+//                 "everyoneNeededText": "Responses: Everyone's approval needed",
+//                     "approvalResponses": [
+//                         {
+//                             "name": "Rayhan",
+//                             "hasApproved": "Approved",
+//                             "approvalDate": "23-07-2020 at 1.25PM"
+//                         },
+//                         {
+//                             "name": "Sumon",
+//                             "hasApproved": "Rejected",
+//                             "approvalDate": "23-07-2020 at 1.25PM"
+
+//                         },
+//                       {
+//                         "name": "Rashed",
+//                         "hasApproved": "Pending"
+
+//                       }
+//                     ]
+//}

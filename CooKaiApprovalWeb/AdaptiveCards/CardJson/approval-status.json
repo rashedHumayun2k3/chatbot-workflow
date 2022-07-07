@@ -1,0 +1,39 @@
+﻿{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.2",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "${titleText}",
+      "size": "large",
+      "weight": "bolder",
+      "color": "accent"
+    },
+    {
+      "type": "TextBlock",
+      "text": "${bodyText}"
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.OpenUrl",
+      "title": "${createApprovalRequestText}",
+      "url": "${createApprovalUrl}"
+    },
+    {
+      "type": "Action.OpenUrl",
+      "title": "${viewRequestsText}",
+      "url": "${viewRequestsUrl}"
+    }
+  ]
+}
+
+//{
+//    "titleText":"Your approval status.",
+//    "bodyText":"You have **2 pending** request and **1 waiting** for your approval",
+//    "createApprovalRequestText":"Create Approval Request",
+//    "viewRequestsText":"View Requests",
+//    "createApprovalUrl":"http://www.google.com",
+//    "viewRequestsUrl":"http://www.google.com"
+//}

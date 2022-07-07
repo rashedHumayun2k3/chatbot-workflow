@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1169
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CooKaiApprovalWeb", "CooKaiApprovalWeb\CooKaiApprovalWeb.csproj", "{4FFFE9AD-BFA6-4D84-B312-2A85E8A6680C}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "CookaiApprovalDb", "CookaiApprovalDb\CookaiApprovalDb.sqlproj", "{93AF0DDC-9D13-405F-BC92-8F41D0D12154}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4FFFE9AD-BFA6-4D84-B312-2A85E8A6680C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FFFE9AD-BFA6-4D84-B312-2A85E8A6680C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FFFE9AD-BFA6-4D84-B312-2A85E8A6680C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FFFE9AD-BFA6-4D84-B312-2A85E8A6680C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93AF0DDC-9D13-405F-BC92-8F41D0D12154}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93AF0DDC-9D13-405F-BC92-8F41D0D12154}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93AF0DDC-9D13-405F-BC92-8F41D0D12154}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{93AF0DDC-9D13-405F-BC92-8F41D0D12154}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93AF0DDC-9D13-405F-BC92-8F41D0D12154}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93AF0DDC-9D13-405F-BC92-8F41D0D12154}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {498B69BE-B65B-4D2F-81B8-6024182035B4}
+	EndGlobalSection
+EndGlobal

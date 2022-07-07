@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="92a448a8d49747bb9ebf6286cb62d001" Name="Diagram1" ZoomLevel="86">
+        <EntityTypeShape EntityType="CookaiApprovalDBModel.ApprovalLevel" Width="1.5" PointX="10.5" PointY="12.25" />
+        <EntityTypeShape EntityType="CookaiApprovalDBModel.ApprovalRequestApproverOrViewer" Width="1.5" PointX="12.75" PointY="14.625" />
+        <EntityTypeShape EntityType="CookaiApprovalDBModel.ApprovalRequest" Width="1.5" PointX="5.25" PointY="11.125" />
+        <EntityTypeShape EntityType="CookaiApprovalDBModel.ApprovalStatu" Width="1.5" PointX="3" PointY="12.75" />
+        <EntityTypeShape EntityType="CookaiApprovalDBModel.PerWebUserCache" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="CookaiApprovalDBModel.RequestAttachment" Width="1.5" PointX="7.5" PointY="16.25" />
+        <EntityTypeShape EntityType="CookaiApprovalDBModel.RequestRemark" Width="1.5" PointX="10.5" PointY="16.625" />
+        <EntityTypeShape EntityType="CookaiApprovalDBModel.TemplateApproverOrViewer" Width="1.5" PointX="7.5" PointY="12.5" />
+        <EntityTypeShape EntityType="CookaiApprovalDBModel.TemplateLevel" Width="1.5" PointX="5.25" PointY="7.125" />
+        <EntityTypeShape EntityType="CookaiApprovalDBModel.Template" Width="1.5" PointX="3" PointY="7.125" />
+        <EntityTypeShape EntityType="CookaiApprovalDBModel.TenantInfo" Width="1.5" PointX="0.75" PointY="9.5" />
+        <EntityTypeShape EntityType="CookaiApprovalDBModel.UserInfo" Width="1.5" PointX="3" PointY="16.5" />
+        <EntityTypeShape EntityType="CookaiApprovalDBModel.UserPreference" Width="1.5" PointX="5.25" PointY="17.5" />
+        <AssociationConnector Association="CookaiApprovalDBModel.FK_ApprovalRequestApproverOrViewer_ApprovalSteps" />
+        <AssociationConnector Association="CookaiApprovalDBModel.FK_ApprovalSteps_ApprovalRequests" />
+        <AssociationConnector Association="CookaiApprovalDBModel.FK_ApprovalSteps_ApprovalStatus" />
+        <AssociationConnector Association="CookaiApprovalDBModel.FK_ApprovalRequestApproverOrViewer_ApprovalStatus" />
+        <AssociationConnector Association="CookaiApprovalDBModel.FK_RequestApproversOrViewers_UserInfo" />
+        <AssociationConnector Association="CookaiApprovalDBModel.FK_ApprovalRequests_ApprovalStatus" />
+        <AssociationConnector Association="CookaiApprovalDBModel.FK_ApprovalRequests_Templates" />
+        <AssociationConnector Association="CookaiApprovalDBModel.FK_ApprovalRequests_TenantInfo" />
+        <AssociationConnector Association="CookaiApprovalDBModel.FK_ApprovalRequests_UserInfo" />
+        <AssociationConnector Association="CookaiApprovalDBModel.FK_RequestAttachments_ApprovalRequests" />
+        <AssociationConnector Association="CookaiApprovalDBModel.FK_RequestRemarks_ApprovalRequests" />
+        <AssociationConnector Association="CookaiApprovalDBModel.FK_RequestAttachments_UserInfo" />
+        <AssociationConnector Association="CookaiApprovalDBModel.FK_RequestRemarks_UserInfo" />
+        <AssociationConnector Association="CookaiApprovalDBModel.FK_TemplateApproverOrViewer_TemplateLevels" />
+        <AssociationConnector Association="CookaiApprovalDBModel.FK_TemplateApproverOrViewer_UserInfo" />
+        <AssociationConnector Association="CookaiApprovalDBModel.FK_TemplateLevels_Templates" />
+        <AssociationConnector Association="CookaiApprovalDBModel.FK_Templates_TenantInfo" />
+        <AssociationConnector Association="CookaiApprovalDBModel.FK_UserInfo_TenantInfo" />
+        <AssociationConnector Association="CookaiApprovalDBModel.FK_UserPreferences_UserInfo" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

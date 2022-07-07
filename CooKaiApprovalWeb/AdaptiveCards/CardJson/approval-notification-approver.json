@@ -1,0 +1,396 @@
+﻿{
+  "type": "AdaptiveCard",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "${requestedBy} ${requestedByTextForApprover}"
+    },
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "items": [
+                {
+                  "type": "Image",
+                  "url": "${lineImageUrl}"
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "**タイトル:**",
+                  "wrap": true
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "${title}",
+                  "spacing": "none",
+                  "size": "Large",
+                  "wrap": true
+                },
+                {
+                  "type": "ColumnSet",
+                  "columns": [
+                    {
+                      "type": "Column",
+                      "width": "stretch",
+                      "items": [
+                        {
+                          "type": "Container",
+                          "items": [
+                            {
+                              "type": "TextBlock",
+                              "text": "**内容:**",
+                              "wrap": true
+                            },
+                            {
+                              "type": "TextBlock",
+                              "text": "${description}",
+                              "wrap": true,
+                              "spacing": "none"
+                            }
+                          ],
+
+                          "$when": "${description!='' }"
+                        },
+                        {
+                          "type": "ColumnSet",
+                          "columns": [
+                            {
+                              "type": "Column",
+                              "width": "stretch",
+                              "items": [
+                                {
+                                  "type": "TextBlock",
+                                  "text": "**${attachmentsText}:**",
+                                  "$when": "${attachmentCount > 0 }"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "ColumnSet",
+                          "$data": "${attachments}",
+                          "columns": [
+                            {
+                              "type": "Column",
+                              "width": "auto",
+                              "items": [
+                                {
+                                  "type": "Image",
+                                  "url": "${fileIconUrl}"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "Column",
+                              "width": "stretch",
+                              "items": [
+                                {
+                                  "type": "TextBlock",
+                                  "text": "[${fileName}](${fileUrl})"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "width": "stretch"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "**承認状況:**"
+        },
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "id": "chevronDown4",
+              "selectAction": {
+                "type": "Action.ToggleVisibility",
+                "title": "show history",
+                "targetElements": [
+                  "cardContent4",
+                  "chevronUp4",
+                  "chevronDown4"
+                ]
+              },
+              "verticalContentAlignment": "Center",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "color": "Accent",
+                  "text": "${responded}/${totalApprover} ${outOfText} **${showDetailsText}**",
+                  "wrap": true
+                }
+              ],
+              "width": 1
+            },
+            {
+              "type": "Column",
+              "id": "chevronUp4",
+              "selectAction": {
+                "type": "Action.ToggleVisibility",
+                "title": "hide history",
+                "targetElements": [
+                  "cardContent4",
+                  "chevronUp4",
+                  "chevronDown4"
+                ]
+              },
+              "verticalContentAlignment": "Center",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "color": "Accent",
+                  "text": "${responded}/${totalApprover} ${outOfText} **${hideDetailsText}**",
+                  "wrap": true
+                }
+              ],
+              "width": 1,
+              "isVisible": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Container",
+      "id": "cardContent4",
+      "items": [
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "stretch",
+              "items": [
+                {
+                  "type": "ColumnSet",
+                  "columns": [
+                    {
+                      "type": "Column",
+                      "width": "auto",
+                      "items": [
+                        {
+                          "type": "Image",
+                          "url": "${requestStatusIconUrl}"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Column",
+                      "width": "auto",
+                      "items": [
+                        {
+                          "type": "TextBlock",
+                          "text": "${requestText} ${reqStatusText}",
+                          "weight": "Bolder"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "stretch",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "${responded}/${totalApprover} ${respondedText}",
+                  "horizontalAlignment": "Right",
+                  "weight": "Bolder"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "Container",
+          "items": [
+            {
+              "type": "ColumnSet",
+              "columns": [
+                {
+                  "type": "Column",
+                  "width": "stretch",
+                  "items": [
+                    {
+                      "type": "TextBlock",
+                      "text": "${everyoneNeededText}"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "ColumnSet",
+              "$data": "${approvalResponses}",
+              "columns": [
+                {
+                  "type": "Column",
+                  "width": "stretch",
+                  "items": [
+                    {
+                      "type": "TextBlock",
+                      "text": "${name}"
+                    }
+                  ]
+                },
+                {
+                  "type": "Column",
+                  "width": "stretch",
+                  "items": [
+                    {
+                      "type": "ColumnSet",
+                      "columns": [
+                        {
+                          "type": "Column",
+                          "width": "auto",
+                          "items": [
+                            {
+                              "type": "Image",
+                              "url": "${statusIconUrl}",
+                              "size": "auto"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Column",
+                          "width": "auto",
+                          "items": [
+                            {
+                              "type": "TextBlock",
+                              "text": "${hasApproved}"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "Column",
+                  "width": "stretch",
+                  "items": [
+                    {
+                      "type": "TextBlock",
+                      "$when": "${approvalDate != null}",
+                      "text": "{{DATE(${approvalDate}, COMPACT)}}  {{TIME(${approvalDate})}}"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "isVisible": false,
+      "style": "emphasis"
+    },
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "stretch",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "**${commentText}:**"
+                },
+                {
+                  "type": "ColumnSet",
+                  "columns": [
+                    {
+                      "type": "Column",
+                      "width": "stretch",
+                      "items": [
+                        {
+                          "type": "Input.Text",
+                          "isMultiline": true,
+                          "placeholder": "${commentPlaceHolderText}",
+                          "id": "txtComment"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "ColumnSet",
+          "horizontalAlignment": "Center",
+          "columns": [
+            {
+              "type": "Column",
+              "horizontalAlignment": "Center",
+              "items": [
+                {
+                  "type": "ActionSet",
+                  "actions": [
+                    {
+                      "type": "Action.Submit",
+                      "title": "${approveText}",
+                      "data": {
+                        "id": "${approvalRequestId}",
+                        "action": "approve"
+                      }
+                    }
+                  ]
+                }
+              ],
+              "width": "auto"
+            },
+            {
+              "type": "Column",
+              "width": "auto",
+              "horizontalAlignment": "Center",
+              "items": [
+                {
+                  "type": "ActionSet",
+                  "actions": [
+                    {
+                      "type": "Action.Submit",
+                      "title": "${rejectText}",
+                      "data": {
+                        "id": "${approvalRequestId}",
+                        "action": "reject"
+                      }
+                    }
+                  ],
+                  "isVisible": "${rejectBtnVisible}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.2",
+  "fallbackText": "This card requires Adaptive Cards v1.2 support to be rendered properly."
+}
